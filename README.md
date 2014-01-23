@@ -24,3 +24,8 @@ An example use of the gate to restrict the In-App purchase:
             [[InAppPurchaseHelper sharedInstance] buyProductWithId:@"fullpro"];
         }
     }];
+
+Author
+======
+
+If you wish to contact me, email at: kender@codingslut.com
