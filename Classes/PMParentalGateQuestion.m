@@ -37,8 +37,14 @@ static PMParentalGateQuestion* __gate = nil;
     }
     return __gate;
 }
+- (void) timedoutForAlertView:(UIAlertView *) alertView
+{
+    self.finished ( NO, GR_TIMEOUT );
+    [alertView dismissWithClickedButtonIndex:0 animated:YES];
+}
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(timedoutForAlertView:) object:alertView];
     if (buttonIndex == [alertView cancelButtonIndex]) {
         self.finished ( NO, GR_CANCEL );
         return;
@@ -54,10 +60,6 @@ static PMParentalGateQuestion* __gate = nil;
     }
 }
 
-- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    self.finished ( NO, GR_TIMEOUT );
-}
 - (void) presentGateWithText:(NSString *) textQuestion timeout:(CGFloat) timeout finishedBlock:(FinishedBlock) finished
 {
     self.finished = finished;
@@ -77,7 +79,7 @@ static PMParentalGateQuestion* __gate = nil;
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [[av textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
     [av show];
-    [av performSelector:@selector(dismissWithClickedButtonIndex:animated:) withObject:[NSNumber numberWithInt:0] afterDelay:timeout];
+    [self performSelector:@selector(timedoutForAlertView:) withObject:av afterDelay:timeout];
 
 }
 
