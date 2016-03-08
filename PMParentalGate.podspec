@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PMParentalGate"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "A drop-in class for iOS applications that allow to add a parental-gate to the app"
   s.description  = <<-DESC
                     SimpleAudioPlayer

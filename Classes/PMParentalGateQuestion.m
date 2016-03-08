@@ -69,12 +69,12 @@ static PMParentalGateQuestion* __gate = nil;
     }
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:nil
                                                  message:[NSString stringWithFormat:
-                                                          @"Parental Gate: %@ = ?\n%@",
+                                                          @"%@ = ?\n%@",
                                                           self.equations[self.selectedEquationIdx][0],
-                                                          (nil == textQuestion ? @"Reaching an area restricted to parents" : textQuestion)]
+                                                          (nil == textQuestion ? NSLocalizedText(@"Reaching an area restricted to parents", @"") : textQuestion)]
                                                 delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:@"Ok", nil];
+                                       cancelButtonTitle:NSLocalizedText(@"Cancel", @"Cancel button title")
+                                       otherButtonTitles:NSLocalizedText(@"Ok", @"OK button title"), nil];
     
     av.alertViewStyle = UIAlertViewStylePlainTextInput;
     [[av textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
